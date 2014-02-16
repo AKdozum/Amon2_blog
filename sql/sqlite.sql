@@ -1,4 +1,4 @@
-PRAGMA foreign_keys=ON; #https://www.sqlite.org/foreignkeys.html
+PRAGMA foreign_keys=ON; --https://www.sqlite.org/foreignkeys.html
 CREATE TABLE IF NOT EXISTS member (
     id           INTEGER NOT NULL PRIMARY KEY,
     name         VARCHAR(255)
@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS member (
 CREATE TABLE IF NOT EXISTS entry (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     body TEXT not null,
-    created DATETIME
+    created DATETIME,
+    FOREIGN KEY(id) REFERENCES member(id)
 );
 
 CREATE TABLE IF NOT EXISTS comment (
