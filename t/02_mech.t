@@ -6,6 +6,7 @@ use Plack::Test;
 use Plack::Util;
 use Test::More;
 use Test::Requires 'Test::WWW::Mechanize::PSGI';
+use HTTP::Status qw(:constants);
 
 my $app = Plack::Util::load_psgi 'script/blog-server';
 
@@ -14,6 +15,6 @@ $mech->get_ok('/');
 $mech->get_ok('/entry', 'Get the newest entry');
 #Post a new entry
 my $resp = $mech->post('/entry/post');
-ok(!$resp->is_success, "Post with no parameter");
+ok($resp->code == HTTP_BAD_REQUEST , "Post with no parameter");
 $mech->post_ok('/entry/post', ['body' => 'This is a test entry.'], 'Create new entry');
 done_testing;
