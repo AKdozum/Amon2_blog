@@ -7,7 +7,7 @@ use Plack::Util;
 use Test::More;
 use Test::Requires 'Test::WWW::Mechanize::PSGI';
 use HTTP::Status qw(:constants);
-
+$ENV{AMON2_TESTING} = 1;
 my $app = Plack::Util::load_psgi 'script/blog-server';
 
 my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
